@@ -1,9 +1,16 @@
 <div class="field">
     <div class="card-stack">
+        <!-- card deck -->
         <img [ngStyle]="{'right.px': i*10}" *ngFor="let c of [0,1,2,3], let i = index;"
             src="assets/img/cards/card_cover.png">
+        
         <img (click)="takeCard()" style="right: 50px" src="assets/img/cards/card_cover.png" class="top-card">
         <!-- 5*10 5 Karten, die alle 10px abstand haben -->
-        <img (click)="takeCard()" *ngIf="pickCardAnimation" style="right: 50px" src="assets/img/cards/ace_1.png" class="pick-card">
+        
+        <!-- stack of played cards -->
+        <img *ngFor="let card of game.playedCard" src="assets/img/cards/{{ card }}.png" class="played-card" style="right: 50px">
+        
+        <!-- animation of current card -->
+        <img (click)="takeCard()" *ngIf="pickCardAnimation" style="right: 50px" src="assets/img/cards/{{ currentCard }}.png" class="pick-card">
     </div>
 </div>

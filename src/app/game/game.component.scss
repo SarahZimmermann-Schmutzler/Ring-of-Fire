@@ -32,7 +32,7 @@
 }
 
 .pick-card {
-    animation: pick-card-animation 1.25s ease-in-out;
+    animation: pick-card-animation 1s ease-in-out;
     transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
     // damit endgültige Position gehalten wird
 }
@@ -53,4 +53,8 @@
     100% {
         transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
     }
+}
+
+.played-card {
+    transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
 }

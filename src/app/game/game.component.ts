@@ -8,17 +8,26 @@ import { Game } from 'src/models/game';
 })
 
 export class GameComponent implements OnInit {
-  pickCardAnimation = false; 
-  game: Game; 
+  pickCardAnimation = false;
+  currentCard = '';
+  game: Game;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.newGame();
   }
 
   takeCard() {
-    this.pickCardAnimation = true;
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game.stack.pop();
+      // pop gibt uns den letzten Wert des Arrays aus und entfernt ihn aus Array
+      this.pickCardAnimation = true;
+      setTimeout(() => {
+        this.game.playedCard.push(this.currentCard);
+        this.pickCardAnimation = false;
+      }, 1000);
+    }
   }
 
   newGame() {
