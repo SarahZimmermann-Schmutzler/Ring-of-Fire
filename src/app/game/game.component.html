@@ -2,7 +2,8 @@
     <div class="card-stack">
         <img [ngStyle]="{'right.px': i*10}" *ngFor="let c of [0,1,2,3], let i = index;"
             src="assets/img/cards/card_cover.png">
-        <img (click)="takeCard()" [class.pick-card]="pickCardAnimation" style="right: 50px" src="assets/img/cards/card_cover.png" class="top-card">
+        <img (click)="takeCard()" style="right: 50px" src="assets/img/cards/card_cover.png" class="top-card">
         <!-- 5*10 5 Karten, die alle 10px abstand haben -->
+        <img (click)="takeCard()" *ngIf="pickCardAnimation" style="right: 50px" src="assets/img/cards/ace_1.png" class="pick-card">
     </div>
 </div>

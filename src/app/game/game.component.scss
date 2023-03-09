@@ -11,7 +11,7 @@
 }
 
 .card-stack {
-    margin-bottom: 280px;
+    margin-bottom: 300px;
     margin-left: 140px;
     position: relative;
 
@@ -32,6 +32,25 @@
 }
 
 .pick-card {
-    transition: all 125ms ease-in-out;
-    transform: scale(1.5) !important;
+    animation: pick-card-animation 1.25s ease-in-out;
+    transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
+    // damit endgültige Position gehalten wird
+}
+
+@keyframes pick-card-animation {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.7);
+    }
+
+    50% {
+        transform: scale(1.7);
+    }
+
+    100% {
+        transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
+    }
 }
