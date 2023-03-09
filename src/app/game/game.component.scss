@@ -58,3 +58,8 @@
 .played-card {
     transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
 }
+
+.player-position {
+    position: absolute;
+    right: 0;
+}
