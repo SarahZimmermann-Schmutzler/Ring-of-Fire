@@ -21,3 +21,17 @@
         object-fit: contain;
     }
 }
+
+.top-card {
+    cursor: pointer;
+    transition: all 125ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.1) translateY(-10px);
+    }
+}
+
+.pick-card {
+    transition: all 125ms ease-in-out;
+    transform: scale(1.5) !important;
+}

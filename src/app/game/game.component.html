@@ -1,6 +1,8 @@
 <div class="field">
     <div class="card-stack">
-        <img [ngStyle]="{'right.px': i*10}" *ngFor="let c of [0,1,2,3,4], let i = index;"
+        <img [ngStyle]="{'right.px': i*10}" *ngFor="let c of [0,1,2,3], let i = index;"
             src="assets/img/cards/card_cover.png">
+        <img (click)="takeCard()" [class.pick-card]="pickCardAnimation" style="right: 50px" src="assets/img/cards/card_cover.png" class="top-card">
+        <!-- 5*10 5 Karten, die alle 10px abstand haben -->
     </div>
 </div>
