@@ -2,13 +2,13 @@
     width: 300px;
     display: flex;
     align-items: center;
-    background-color: #ECDE9F;
+    background-color: #D6D1CD;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
 
     img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
         object-fit: cover;
         border-radius: 100%;
     }
@@ -17,4 +17,8 @@
         font-size: 32px;
         margin-left: 16x;
     }
+}
+
+.player-active {
+    background-color: #ECDE9F !important;
 }

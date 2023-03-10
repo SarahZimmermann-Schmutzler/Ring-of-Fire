@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +14,7 @@ export class GameComponent implements OnInit {
   currentCard = '';
   game: Game;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
@@ -33,5 +35,15 @@ export class GameComponent implements OnInit {
   newGame() {
     this.game = new Game();
     console.log(this.game);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe(name => {
+      this.game.players.push(name);
+    });
+    // hier wird bestimmt, was nach dem schließen mit dem Wert des Inputfeldes passiert
+    // pushen den Namen in unser Array
   }
 }
