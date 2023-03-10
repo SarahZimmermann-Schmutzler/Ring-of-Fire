@@ -11,7 +11,7 @@
 }
 
 .card-stack {
-    margin-bottom: 300px;
+    margin-bottom: 400px;
     margin-left: 140px;
     position: relative;
 
@@ -67,5 +67,12 @@
 .btn-add {
     position: absolute;
     right: 32px;
-    bottom: 32px;
+    bottom: 40px;
+}
+
+.game-info {
+    position: absolute;
+    bottom: 40px;
+    left: 200px;
+    right: 200px;
 }
