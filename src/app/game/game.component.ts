@@ -25,6 +25,14 @@ export class GameComponent implements OnInit {
       this.currentCard = this.game.stack.pop();
       // pop gibt uns den letzten Wert des Arrays aus und entfernt ihn aus Array
       this.pickCardAnimation = true;
+
+      setTimeout (() => {
+        this.game.currentPlayer++;
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      // zählt nicht höher als die länge unseres spieler arrays, moduluoperator
+      }, 1500)
+      
+
       setTimeout(() => {
         this.game.playedCard.push(this.currentCard);
         this.pickCardAnimation = false;
@@ -41,7 +49,9 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(name => {
-      this.game.players.push(name);
+      if(name && name.length > 0) {
+        this.game.players.push(name);
+      }
     });
     // hier wird bestimmt, was nach dem schließen mit dem Wert des Inputfeldes passiert
     // pushen den Namen in unser Array
