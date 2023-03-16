@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { collection, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { collectionData } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -17,19 +18,21 @@ export class GameComponent implements OnInit {
   currentCard = '';
   game: Game;
   games$: Observable<any>;
-  games: Array<any>;
 
-  constructor(firestore: Firestore, public dialog: MatDialog) { 
-    const coll = collection(firestore, 'games');
-    this.games$ = collectionData(coll);
-    this.games$.subscribe((newgamedata) => {
-      console.log('Game update:', newgamedata);
-      this.games = newgamedata;
-    })
-  }
+  constructor(private firestore: Firestore, public dialog: MatDialog, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.newGame();
+    this.route.params.subscribe((params) => {
+      let gameId = params['id'];
+      // console.log(gameId);
+      const coll = collection(this.firestore, 'games');
+      const docRef = doc(coll, gameId);
+      this.games$ = docData(docRef);
+      this.games$.subscribe((newgamedata) => {
+        console.log('Game update:', newgamedata);
+      });
+    });
   }
 
   takeCard() {
@@ -38,12 +41,12 @@ export class GameComponent implements OnInit {
       // pop gibt uns den letzten Wert des Arrays aus und entfernt ihn aus Array
       this.pickCardAnimation = true;
 
-      setTimeout (() => {
+      setTimeout(() => {
         this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      // zählt nicht höher als die länge unseres spieler arrays, moduluoperator
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+        // zählt nicht höher als die länge unseres spieler arrays, moduluoperator
       }, 1500)
-      
+
 
       setTimeout(() => {
         this.game.playedCard.push(this.currentCard);
@@ -55,13 +58,17 @@ export class GameComponent implements OnInit {
   newGame() {
     this.game = new Game();
     console.log(this.game);
+    // const coll = collection(this.firestore, 'games');
+    // addDoc(coll, this.game.toJson());
+    // setDoc(doc(coll), this.game.toJson());
+    // funktioniert beides, welches besser? add macht mehr sinn, setDoc im Vorkurs gelernt
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(name => {
-      if(name && name.length > 0) {
+      if (name && name.length > 0) {
         this.game.players.push(name);
       }
     });

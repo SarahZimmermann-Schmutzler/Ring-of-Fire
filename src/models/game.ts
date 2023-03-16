@@ -15,6 +15,16 @@ export class Game {
 
         shuffle(this.stack);
     }
+
+    public toJson() {
+        return {
+            players: this.players,
+            stack: this.stack,
+            playedCards: this.playedCard,
+            currentPlayer: this.currentPlayer
+        };
+    }
+    // wandelt Game-Objekt (bzw dessen variablen) in JSON-Objekt um
 }
 
 // von StackOverflow
