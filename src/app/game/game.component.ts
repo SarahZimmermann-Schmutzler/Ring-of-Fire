@@ -63,10 +63,6 @@ export class GameComponent implements OnInit {
   newGame() {
     this.game = new Game();
     console.log(this.game);
-    // const coll = collection(this.firestore, 'games');
-    // addDoc(coll, this.game.toJson());
-    // setDoc(doc(coll), this.game.toJson());
-    // funktioniert beides, welches besser? add macht mehr sinn, setDoc im Vorkurs gelernt
   }
 
   openDialog(): void {
