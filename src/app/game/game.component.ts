@@ -29,8 +29,13 @@ export class GameComponent implements OnInit {
       const coll = collection(this.firestore, 'games');
       const docRef = doc(coll, gameId);
       this.games$ = docData(docRef);
+      // holen hier nur die Daten des Dokuments mit der passenden ID
       this.games$.subscribe((newgamedata) => {
         console.log('Game update:', newgamedata);
+        this.game.currentPlayer = newgamedata.currentPlayer;
+        this.game.playedCard = newgamedata.playedCard;
+        this.game.players = newgamedata.players;
+        this.game.stack = newgamedata.stack;
       });
     });
   }
