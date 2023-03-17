@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { addDoc, collection, doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
+import { addDoc, collection, doc, docData, Firestore, getFirestore, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { collectionData } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
@@ -18,16 +18,17 @@ export class GameComponent implements OnInit {
   currentCard = '';
   game: Game;
   games$: Observable<any>;
+  gameId: string;
 
   constructor(private firestore: Firestore, public dialog: MatDialog, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.newGame();
     this.route.params.subscribe((params) => {
-      let gameId = params['id'];
+      this.gameId = params['id'];
       // console.log(gameId);
       const coll = collection(this.firestore, 'games');
-      const docRef = doc(coll, gameId);
+      const docRef = doc(coll, this.gameId);
       this.games$ = docData(docRef);
       // holen hier nur die Daten des Dokuments mit der passenden ID
       this.games$.subscribe((newgamedata) => {
@@ -71,9 +72,16 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe(name => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.updateGame();
       }
     });
     // hier wird bestimmt, was nach dem schließen mit dem Wert des Inputfeldes passiert
     // pushen den Namen in unser Array
+  }
+
+  updateGame() {
+    const coll = collection(this.firestore, 'games');
+    const docRef = doc(coll, this.gameId);
+    updateDoc(docRef, this.game.toJson());
   }
 }
