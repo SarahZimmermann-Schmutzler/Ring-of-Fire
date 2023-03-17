@@ -14,8 +14,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class GameComponent implements OnInit {
-  pickCardAnimation = false;
-  currentCard = '';
   game: Game;
   games$: Observable<any>;
   gameId: string;
@@ -37,15 +35,18 @@ export class GameComponent implements OnInit {
         this.game.playedCards = newgamedata.playedCards;
         this.game.players = newgamedata.players;
         this.game.stack = newgamedata.stack;
+        this.game.pickCardAnimation = newgamedata.pickCardAnimation;
+        this.game.currentCard = newgamedata.currentCard;
       });
     });
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop();
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
       // pop gibt uns den letzten Wert des Arrays aus und entfernt ihn aus Array
-      this.pickCardAnimation = true;
+      this.game.pickCardAnimation = true;
+      this.updateGame();
 
       setTimeout(() => {
         this.game.currentPlayer++;
@@ -55,8 +56,9 @@ export class GameComponent implements OnInit {
 
 
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAnimation = false;
+        this.updateGame();
       }, 1000);
     }
   }
