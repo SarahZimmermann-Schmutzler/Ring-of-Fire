@@ -10,7 +10,7 @@
         <!-- 5*10 5 Karten, die alle 10px abstand haben -->
         
         <!-- stack of played cards -->
-        <img *ngFor="let card of game.playedCard" src="assets/img/cards/{{ card }}.png" class="played-card" style="right: 50px">
+        <img *ngFor="let card of game.playedCards" src="assets/img/cards/{{ card }}.png" class="played-card" style="right: 50px">
         
         <!-- animation of current card -->
         <img (click)="takeCard()" *ngIf="pickCardAnimation" style="right: 50px" src="assets/img/cards/{{ currentCard }}.png" class="pick-card">

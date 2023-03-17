@@ -34,7 +34,7 @@ export class GameComponent implements OnInit {
       this.games$.subscribe((newgamedata) => {
         console.log('Game update:', newgamedata);
         this.game.currentPlayer = newgamedata.currentPlayer;
-        this.game.playedCard = newgamedata.playedCard;
+        this.game.playedCards = newgamedata.playedCards;
         this.game.players = newgamedata.players;
         this.game.stack = newgamedata.stack;
       });
@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
 
 
       setTimeout(() => {
-        this.game.playedCard.push(this.currentCard);
+        this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
       }, 1000);
     }
