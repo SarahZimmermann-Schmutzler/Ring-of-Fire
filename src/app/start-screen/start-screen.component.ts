@@ -9,19 +9,27 @@ import { Game } from 'src/models/game';
   styleUrls: ['./start-screen.component.scss']
 })
 export class StartScreenComponent {
-
+  
   constructor(private router: Router, private firestore: Firestore) {}
 
   async newGame() {
     //start game
     let game = new Game();
+
+    // add collection and fetch it's id 
     const coll = collection(this.firestore, 'games');
-    addDoc(coll, game.toJson());
-    // setDoc(doc(coll), game.toJson());
-    // funktioniert beides, welches besser? add macht mehr sinn, setDoc im Vorkurs gelernt
-    const docRef = doc(coll);
-    let gameId = docRef['id'];
-    // console.log(gameId);
-    this.router.navigateByUrl('/game/'+ gameId);
+
+    // A) Alternative mit setDoc
+    // let docRef = doc(coll);
+    // setDoc(docRef, game.toJson());
+    // let docSnap = await getDoc(docRef);
+    // let gameId = docSnap.id;
+    // console.log('id is:', gameId);
+    
+    // B) Alternative mit addDoc
+    let gameinfo = await addDoc(coll, game.toJson());
+    // console.log('id is', gameinfo.id);
+    
+    this.router.navigateByUrl('/game/'+ gameinfo.id);
   }
 }
