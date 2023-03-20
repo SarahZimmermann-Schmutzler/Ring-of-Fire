@@ -15,7 +15,7 @@
 
 .text-start {
     width: 97px;
-    margin-right: 13px;
+    margin-right: 8px;
     height: 156px;
     margin-top: 32px;
     color: #481F21;
@@ -24,5 +24,19 @@
 
     &:hover {
         color: #AF8F55;
+    }
+
+    @media(max-width: 525px) {
+        width: 71px;
+        font-size: 20px;
+        margin-right: -9px;
+        margin-top: 108px;
+    }
+
+    @media(max-width: 330px) {
+        width: 54px;
+        font-size: 16px;
+        margin-right: -9px;
+        margin-top: 115px;
     }
 }
