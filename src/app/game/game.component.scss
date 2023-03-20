@@ -15,6 +15,10 @@
     margin-left: 140px;
     position: relative;
 
+    @media (max-width: 520px) {
+        margin-bottom: 350px;
+    }
+
     img {
         position: absolute;
         width: 140px;
@@ -40,6 +44,11 @@
     animation: pick-card-animation 1s ease-in-out;
     transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
     // damit endgültige Position gehalten wird
+
+    @media (max-width: 520px) {
+        animation: pick-card-animation-mobile 1s ease-in-out;
+        transform: scale(1.2) translateX(80px) translateY(-180px) rotate(-10deg);
+    }
 }
 
 @keyframes pick-card-animation {
@@ -60,8 +69,29 @@
     }
 }
 
+@keyframes pick-card-animation-mobile {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.7);
+    }
+
+    50% {
+        transform: scale(1.7);
+    }
+
+    100% {
+        transform: scale(1.2) translateX(80px) translateY(-180px) rotate(-10deg);
+    }
+}
+
 .played-card {
     transform: scale(1.2) translateX(160px) translateY(-180px) rotate(-10deg);
+    @media (max-width: 520px) {
+        transform: scale(1.2) translateX(80px) translateY(-180px) rotate(-10deg);
+    }
 }
 
 .player-position {
